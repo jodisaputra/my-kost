@@ -33,7 +33,7 @@
                         class="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <img src="{{ url('storage', $category->image) }}" alt="">
                         <div class="p-4">
-                            <a href="" class="text-xl font-medium hover:text-green-600">{{ $category->name }}</a>
+                            <a href="/rents?selected_categories={{ $category->id }}" class="text-xl font-medium hover:text-green-600">{{ $category->name }}</a>
                             <p class="text-slate-400 text-sm mt-1">46 Listings</p>
                         </div>
                     </div><!--end content-->
@@ -62,7 +62,7 @@
 
                                 <div class="p-6">
                                     <div class="pb-6">
-                                        <a href="property-detail.html"
+                                        <a href="/rents/{{ $featured->slug }}"
                                            class="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{{ $featured->name }}</a>
                                     </div>
 

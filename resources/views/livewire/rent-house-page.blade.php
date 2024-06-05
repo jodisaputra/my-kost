@@ -9,7 +9,7 @@
                                 <label for="searchname" class="font-medium">Search Properties</label>
                                 <div class="relative mt-2">
                                     <i class="uil uil-search text-lg absolute top-[8px] start-3"></i>
-                                    <input name="search" id="searchname" type="text"
+                                    <input name="search" id="searchname" wire:model.live.debounce.300ms="search" type="text"
                                            class="form-input border border-slate-100 dark:border-slate-800 ps-10"
                                            placeholder="Search">
                                 </div>
@@ -42,7 +42,7 @@
 
                             <div class="p-6">
                                 <div class="pb-6">
-                                    <a href="property-detail.html"
+                                    <a href="/rents/{{ $rent->slug }}"
                                        class="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{{ $rent->name }}</a>
                                 </div>
 

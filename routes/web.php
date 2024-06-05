@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Livewire\HomePage::class);
 Route::get('/rents', \App\Livewire\RentHousePage::class);
+Route::get('/rents/{slug}', \App\Livewire\RentHouseDetailPage::class);
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', \App\Livewire\Auth\LoginPage::class)->name('login');

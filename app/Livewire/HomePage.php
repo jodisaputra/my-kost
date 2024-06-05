@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\RentHouse;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Share Home Properties - Home')]
 class HomePage extends Component
 {
     public function render()
