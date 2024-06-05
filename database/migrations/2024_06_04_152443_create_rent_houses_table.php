@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->decimal('price', 10,2);
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_featured')->default(true);
             $table->timestamps();
         });
     }

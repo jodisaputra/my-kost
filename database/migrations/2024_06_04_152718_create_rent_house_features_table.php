@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('rent_house_features', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rent_house_id')->constrained('rent_houses')->cascadeOnDelete();
-            $table->string('image')->nullable();
             $table->string('name');
             $table->timestamps();
         });

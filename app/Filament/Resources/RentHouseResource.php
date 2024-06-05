@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RentHouseResource\Pages;
 use App\Filament\Resources\RentHouseResource\RelationManagers;
 use App\Models\RentHouse;
+use Filament\Actions\ReplicateAction;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\TextInput;
@@ -70,7 +71,8 @@ class RentHouseResource extends Resource
 
                         Forms\Components\Section::make('Status')->schema([
                             Forms\Components\Toggle::make('is_active')->required()->default(true),
-                        ])
+                            Forms\Components\Toggle::make('is_featured')->required()->default(true),
+                        ]),
                     ])
                 ])->columnSpan(1),
                 Forms\Components\Section::make('Features')->schema([
@@ -78,10 +80,6 @@ class RentHouseResource extends Resource
                         ->relationship()
                         ->schema([
                             Forms\Components\TextInput::make('name'),
-                            Forms\Components\FileUpload::make('image')
-                                ->image()
-                                ->directory('rent_house_feature')
-                                ->columnSpanFull(),
                         ]),
                 ])
             ])->columns(3);
@@ -95,6 +93,7 @@ class RentHouseResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')->sortable(),
                 Tables\Columns\TextColumn::make('price')->money('IDR')->sortable(),
                 Tables\Columns\IconColumn::make('is_active')->boolean(),
+                Tables\Columns\IconColumn::make('is_featured')->boolean(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -105,7 +104,7 @@ class RentHouseResource extends Resource
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
-                    DeleteAction::make(),
+                    DeleteAction::make()
                 ]),
             ])
             ->bulkActions([
