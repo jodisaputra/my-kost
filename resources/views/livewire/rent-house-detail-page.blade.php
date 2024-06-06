@@ -6,12 +6,12 @@
                     <div class="tiny-one-item">
                             @if(empty($rent_house->images))
                             <img src="{{ asset('') }}assets/images/property/single/1.jpg"
-                                 class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                 class="rounded-md shadow dark:shadow-gray-700" alt="image">
                             @else
                                 @foreach($rent_house->images as $image)
                                 <div class="tiny-slide">
                                     <img src="{{ url('storage', $image) }}"
-                                         class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                         class="rounded-md shadow dark:shadow-gray-700" alt="image">
                                 </div>
                             @endforeach
                         @endif
@@ -19,7 +19,7 @@
                 </div>
 
                 <h4 class="text-2xl font-medium mt-6 mb-3">{{ $rent_house->name }}</h4>
-                <span class="text-slate-400 flex items-center"><i data-feather="map-pin" class="size-5 me-2"></i> {{ $rent_house->description }}</span>
+                <span class="text-slate-400 flex items-center"><i data-feather="map-pin" class="size-5 me-2"></i> {{ $rent_house->address }}</span>
 
                 <ul class="py-6 flex items-center list-none">
                     @foreach($rent_house->features as $feature)

@@ -49,7 +49,8 @@ class RentHouseResource extends Resource
                         TextInput::make('slug')
                             ->unique(RentHouse::class, 'slug', ignoreRecord: true)
                             ->readOnly(),
-                        Forms\Components\MarkdownEditor::make('description')->columnSpanFull()->fileAttachmentsDirectory('products')
+                        Forms\Components\MarkdownEditor::make('description')->columnSpanFull()->fileAttachmentsDirectory('products'),
+                        TextInput::make('address')->required()->columnSpanFull(),
                     ])->columns(2),
 
                     Forms\Components\Section::make('Images')->schema([

@@ -17,6 +17,8 @@
     <link href="{{ asset('') }}assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('') }}assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/tailwind.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/scripts/verify.min.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
