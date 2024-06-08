@@ -31,10 +31,10 @@
                                 @enderror
                             </div>
 
-                            <div class="flex justify-between mb-4">
-                                <p class="text-slate-400 mb-0"><a href="" class="text-slate-400">Forgot
-                                        password ?</a></p>
-                            </div>
+{{--                            <div class="flex justify-between mb-4">--}}
+{{--                                <p class="text-slate-400 mb-0"><a href="" class="text-slate-400">Forgot--}}
+{{--                                        password ?</a></p>--}}
+{{--                            </div>--}}
 
                             <div class="mb-4">
                                 <button type="submit"

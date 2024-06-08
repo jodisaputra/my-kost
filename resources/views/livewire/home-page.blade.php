@@ -29,16 +29,23 @@
 
             <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 mt-8 md:gap-[30px] gap-3">
                 @foreach($categories as $category)
+                    @php
+                        $listingsCount = \App\Models\RentHouse::whereHas('category', function ($query) use ($category) {
+                            $query->where('id', $category->id);
+                        })->count();
+                    @endphp
                     <div
                         class="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <img src="{{ url('storage', $category->image) }}" alt="">
                         <div class="p-4">
-                            <a href="/rents?selected_categories={{ $category->id }}" class="text-xl font-medium hover:text-green-600">{{ $category->name }}</a>
-                            <p class="text-slate-400 text-sm mt-1">46 Listings</p>
+                            <a href="/rents?selected_categories={{ $category->id }}"
+                               class="text-xl font-medium hover:text-green-600">{{ $category->name }}</a>
+                            <p class="text-slate-400 text-sm mt-1">{{ $listingsCount }} Listings</p>
                         </div>
                     </div><!--end content-->
                 @endforeach
             </div><!--end grid-->
+
         </div><!--end container-->
 
         <div class="container relative lg:mt-24 mt-16">
@@ -84,12 +91,18 @@
                                         <li>
                                             <span class="text-slate-400">Rating</span>
                                             <ul class="text-lg font-medium text-amber-400 list-none">
-                                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                <li class="inline text-black dark:text-white">5.0(30)</li>
+                                                @if($featured->total_ratings > 0)
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <li class="inline"><i
+                                                                class="mdi mdi-star{{ $i <= $featured->average_rating ? '' : '-outline' }}"></i>
+                                                        </li>
+                                                    @endfor
+                                                    <li class="inline text-black dark:text-white">{{ round($featured->average_rating, 1) }}
+                                                        ({{ $featured->total_ratings }})
+                                                    </li>
+                                                @else
+                                                    <li class="inline">No ratings yet</li>
+                                                @endif
                                             </ul>
                                         </li>
                                     </ul>
@@ -99,165 +112,6 @@
                     @endforeach
                 </div>
             </div><!--en grid-->
-        </div><!--end container-->
-
-        <div class="container relative lg:mt-24 mt-16">
-            <div class="grid grid-cols-1 pb-8 text-center">
-                <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">What Our Client Say
-                    ?</h3>
-
-                <p class="text-slate-400 max-w-xl mx-auto">A great plateform to buy, sell and rent your properties
-                    without any agent or commisions.</p>
-            </div><!--end grid-->
-
-            <div class="flex justify-center relative mt-16">
-                <div class="relative lg:w-1/3 md:w-1/2 w-full">
-                    <div class="absolute -top-20 md:-start-24 -start-0">
-                        <i class="mdi mdi-format-quote-open text-9xl opacity-5"></i>
-                    </div>
-
-                    <div class="absolute bottom-28 md:-end-24 -end-0">
-                        <i class="mdi mdi-format-quote-close text-9xl opacity-5"></i>
-                    </div>
-
-                    <div class="tiny-single-item">
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " Hously made the processes so easy. Hously
-                                    instantly increased the amount of interest and ultimately saved us over $10,000.
-                                    " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/01.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " I highly recommend Hously as the new way to
-                                    sell your home "by owner". My home sold in 24 hours for the asking price. Best $400
-                                    you could spend to sell your home. " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/02.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " My favorite part about selling my home
-                                    myself was that we got to meet and get to know the people personally. This made it
-                                    so much more enjoyable! " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/03.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " Great experience all around! Easy to use and
-                                    efficient. " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/04.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " Hously made selling my home easy and stress
-                                    free. They went above and beyond what is expected. " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/05.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <div class="text-center">
-                                <p class="text-xl text-slate-400 italic"> " Hously is fair priced, quick to respond, and
-                                    easy to use. I highly recommend their services! " </p>
-
-                                <div class="text-center mt-5">
-                                    <ul class="text-xl font-medium text-amber-400 list-none mb-2">
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                    </ul>
-
-                                    <img src="assets/images/client/06.jpg"
-                                         class="size-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="">
-                                    <h6 class="mt-2 fw-semibold">Christa Smith</h6>
-                                    <span class="text-slate-400 text-sm">Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end grid-->
         </div><!--end container-->
     </section><!--end section-->
     <!-- End -->
