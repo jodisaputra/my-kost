@@ -4,11 +4,11 @@
             <div class="lg:col-span-8 md:col-span-7">
                 <div class="grid grid-cols-1 relative">
                     <div class="tiny-one-item">
-                            @if(empty($rent_house->images))
+                        @if(empty($rent_house->images))
                             <img src="{{ asset('') }}assets/images/property/single/1.jpg"
                                  class="rounded-md shadow dark:shadow-gray-700" alt="image">
-                            @else
-                                @foreach($rent_house->images as $image)
+                        @else
+                            @foreach($rent_house->images as $image)
                                 <div class="tiny-slide">
                                     <img src="{{ url('storage', $image) }}"
                                          class="rounded-md shadow dark:shadow-gray-700" alt="image">
@@ -40,7 +40,8 @@
                             <h5 class="text-2xl font-medium">Price:</h5>
 
                             <div class="flex justify-between items-center mt-4">
-                                <span class="text-xl font-medium">{{ Number::currency($rent_house->price, 'IDR') }}</span>
+                                <span
+                                    class="text-xl font-medium">{{ Number::currency($rent_house->price, 'IDR') }}</span>
 
                                 <span
                                     class="bg-green-600/10 text-green-600 text-sm px-2.5 py-0.75 rounded h-6">For Sale</span>
@@ -49,8 +50,15 @@
 
                         <div class="flex">
                             <div class="p-1 w-full">
-                                <a href="" class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Book
-                                    Now</a>
+                                @if($transaction)
+                                    <a
+                                        class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Already
+                                        Booked</a>
+                                @else
+                                    <a href="/book-now/{{ $rent_house->slug }}"
+                                       class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Book
+                                        Now</a>
+                                @endif
                             </div>
                         </div>
                     </div>

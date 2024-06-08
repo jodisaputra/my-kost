@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MidtransController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::post('/midtrans/notification', [MidtransController::class, 'notificationHandler']);
 
 Route::get('/', \App\Livewire\HomePage::class);
 Route::get('/rents', \App\Livewire\RentHousePage::class);
@@ -30,4 +33,7 @@ Route::middleware('auth')->group(function () {
         Auth::logout();
         return redirect('/');
     });
+
+    Route::get('/book-now/{slug}', \App\Livewire\TransactionPage::class);
+    Route::get('/my-transactions', \App\Livewire\MyTransaction::class);
 });

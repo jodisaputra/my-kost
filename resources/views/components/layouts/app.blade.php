@@ -18,7 +18,7 @@
     <link href="{{ asset('') }}assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/tailwind.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/scripts/verify.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/scripts/verify.min.js"></script>--}}
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -77,7 +77,7 @@
                             href="javascript:void(0)">Hi, {{ Auth::user()->name  }} </a><span
                             class="submenu-arrow"></span>
                         <ul class="submenu">
-                            <li><a href="comingsoon.html" class="sub-menu-item">My Order</a></li>
+                            <li><a href="/my-transactions" class="sub-menu-item">My Order</a></li>
                             <li><a href="/logout" class="sub-menu-item">Logout</a></li>
                         </ul>
                     </li>
@@ -168,10 +168,11 @@
 <!-- JAVASCRIPTS -->
 <script src="{{ asset('') }}assets/libs/tiny-slider/min/tiny-slider.js"></script>
 <script src="{{ asset('') }}assets/libs/tobii/js/tobii.min.js"></script>
-<script src="{{ asset('') }}assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+{{--<script src="{{ asset('') }}assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>--}}
 <script src="{{ asset('') }}assets/libs/feather-icons/feather.min.js"></script>
 <script src="{{ asset('') }}assets/js/plugins.init.js"></script>
 <script src="{{ asset('') }}assets/js/app.js"></script>
 <!-- JAVASCRIPTS -->
+@stack('scripts')
 </body>
 </html>
