@@ -1,0 +1,7 @@
+#wajib
+- Running composer update
+- copy file .env.example dan rename menjadi .env
+- rubah username, password, dan database yang ada di dalam .env
+- running php artisan key:generate
+- running lagi php artisan migrate, setelah itu php artisan db:seed
+- untuk masuk ke admin, gunakan email: admin@gmail.com, password: password
