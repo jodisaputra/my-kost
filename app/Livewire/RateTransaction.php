@@ -39,6 +39,8 @@ class RateTransaction extends Component
 
         session()->flash('success', 'Rating saved successfully.');
         $this->formVisible = false; // Hide form after rating is submitted
+
+        return redirect('/my-transactions');
     }
 
     public function render()
