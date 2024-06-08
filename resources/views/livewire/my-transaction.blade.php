@@ -37,15 +37,45 @@
                                     <p class="text-lg font-medium">{{ strtoupper($transaction->status) }}</p>
                                 </li>
                             </ul>
+
+                            <ul class="md:pt-4 pt-6 flex justify-between items-center list-none">
+                                <li>
+                                    <span class="text-slate-400">Rating</span>
+                                    @if ($transaction->rent_house)
+                                        <ul class="text-lg font-medium text-amber-400 list-none">
+                                            @if($transaction->rent_house->total_ratings > 0)
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <li class="inline">
+                                                        <i class="mdi mdi-star{{ $i <= $transaction->rent_house->average_rating ? '' : '-outline' }}"></i>
+                                                    </li>
+                                                @endfor
+                                                <li class="inline text-black dark:text-white">{{ round($transaction->rent_house->average_rating, 1) }}
+                                                    ({{ $transaction->rent_house->total_ratings }})
+                                                </li>
+                                            @else
+                                                <li class="inline">No ratings yet</li>
+                                            @endif
+                                        </ul>
+                                    @else
+                                        <p>No associated rent house</p>
+                                    @endif
+                                </li>
+                            </ul>
+
+
+                            @if ($transaction->status === 'success')
+                                <livewire:rate-transaction :transactionId="$transaction->id"
+                                                           :rentHouseId="$transaction->rent_house_id"
+                                                           key="{{ $transaction->id }}"/>
+                            @endif
                         </div>
                     </div>
                 </div>
             @endforeach
-        </div><!--en grid-->
+        </div><!--end grid-->
 
         <div class="grid md:grid-cols-12 grid-cols-1 mt-8">
             {{ $my_transactions->links() }}
         </div><!--end grid-->
     </div><!--end container-->
 </section><!--end section-->
-<!-- End -->
